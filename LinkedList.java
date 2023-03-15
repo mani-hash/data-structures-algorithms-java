@@ -85,9 +85,7 @@ public class LinkedList {
             } else {
                 throw new IndexOutOfBoundsException();
             }
-
         }
-
     }
 
     private void removeLast() {
@@ -108,7 +106,6 @@ public class LinkedList {
         while (point != null) {
             System.out.println(point.data);
             point = point.pointer;
-            
         }
     }
     
@@ -140,7 +137,6 @@ public class LinkedList {
         } else {
             throw new NullPointerException();
         }
-
     }
 
     private int getFirst() {
@@ -165,8 +161,7 @@ public class LinkedList {
 
     
 
-    
-
+    //Node Class
     private class Node {
         int data;
         Node pointer;
@@ -175,59 +170,5 @@ public class LinkedList {
             data = val;
             pointer = null;  
         }
-    }
-
-    public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-
-        list.addLast(56);
-        list.addLast(23);
-        list.addLast(32);
-        list.addLast(3);
-
-        list.add(4, 11);
-        list.add(41);
-        list.add(89);
-
-        list.addFirst(9);
-
-        list.traverse();
-
-        // System.out.println(list.size());
-
-        // System.out.println(list.get(list.size() - 1));
-
-        System.out.println();
-        
-        // list.removeFirst();
-        // list.removeFirst();
-        // list.removeFirst();
-        // list.removeFirst();
-        // list.removeFirst();
-        // list.removeFirst();
-        // list.removeFirst();
-        // list.removeFirst();
-        
-        list.remove(4);
-        list.removeLast();
-        list.removeFirst();
-        list.removeLast();
-        
-        list.traverse();
-
-        System.out.println();
-        System.out.println(list.getFirst());
-        System.out.println(list.getLast());
-
-        list.set(2, 69);
-        System.out.println();
-
-        list.clear();
-        list.traverse();
-
-
-
-        
-
     }
 }

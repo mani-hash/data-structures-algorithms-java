@@ -3,10 +3,11 @@ public class Stack {
     private int[] stack = new int[len];
     private int stack_pointer;
     
-    public Stack() {
+    Stack() {
         stack_pointer = -1;
     }
-    public void push(int val) {
+
+    private void push(int val) {
         if (isFull()) {
             System.out.println("Stack is full");
         } else {
@@ -17,7 +18,7 @@ public class Stack {
 
     }
 
-    public void pop() {
+    private void pop() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
         } else {
@@ -25,7 +26,7 @@ public class Stack {
         }
     }
 
-    public void peek() {
+    private void peek() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
             
@@ -34,40 +35,19 @@ public class Stack {
         }
     }
 
-    public boolean isFull() {
+    private boolean isFull() {
         if (stack_pointer == len - 1) {
             return true;
         }
         return false;
     }
 
-    public boolean isEmpty() {
+    private boolean isEmpty() {
         if (stack_pointer == -1) {
             return true;
         }
         return false;
     }
 
-    public static void main(String[] args) {
-        Stack stack = new Stack();
-        stack.peek();
-        stack.push(5);
-        stack.peek();
-        stack.push(6);
-        stack.push(89);
-        stack.push(56);
-        stack.push(12);
-        stack.push(45);
-        
-        stack.pop();
-        stack.peek();
-
-        while (!(stack.isEmpty())) {
-            stack.pop();
-        }
-
-        stack.pop();
-        stack.peek();
-    }
 
 }

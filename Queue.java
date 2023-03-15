@@ -5,7 +5,7 @@ public class Queue {
     protected int[] queue = new int[len];
     protected int front, rear;
     
-    public Queue() {
+    Queue() {
         front = -1;
         rear = -1;
     }
@@ -48,47 +48,12 @@ public class Queue {
         return false;
     }
 
-    public boolean isEmpty() {
+    protected boolean isEmpty() {
         if (front == -1) {
             return true;
         }
         return false;
     }
-
-    
-    public static void main(String[] args) {
-        Queue queue = new Queue();
-
-        queue.peek();
-
-        queue.enqueue(45);
-        queue.peek();
-        Scanner inp = new Scanner(System.in);
-        while (!(queue.isFull())) {
-
-            queue.enqueue(inp.nextInt());
-        }
-
-        inp.close();
-
-        queue.enqueue(100);
-
-        queue.peek();
-
-        while (!(queue.isEmpty())) {
-            queue.dequeue();
-        }
-
-        queue.dequeue();
-
-
-    }
-
-
-
-
-
-
 }
 
 

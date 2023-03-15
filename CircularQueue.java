@@ -16,9 +16,7 @@ public class CircularQueue extends Queue {
         } else {
             rear = (rear+1) % len;
         }
-
         queue[rear] = val;
-        
     }
 
     protected void dequeue() {
@@ -49,42 +47,6 @@ public class CircularQueue extends Queue {
             return true;
         }
         return false;
-
-    }
-
-    
-
-    public static void main(String[] args) {
-        CircularQueue queue = new CircularQueue();
-
-        queue.getFront();
-        queue.getRear();
-
-        queue.enqueue(45);
-        queue.enqueue(43);
-        queue.enqueue(21);
-        queue.enqueue(67);
-        queue.enqueue(34);
-        queue.enqueue(12);
-
-        queue.getFront();
-        queue.getRear();
-
-        queue.dequeue();
-
-        queue.getFront();
-        queue.getRear();
-        queue.dequeue();
-
-        queue.getFront();
-
-        queue.enqueue(99);
-        queue.getRear();
-
-        queue.enqueue(56);
-        queue.getRear();
-
-        queue.enqueue(1000);
 
     }
 
