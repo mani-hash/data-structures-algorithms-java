@@ -1,6 +1,6 @@
 public class CircularQueue extends Queue {
 
-    public CircularQueue() {
+    CircularQueue() {
         front = -1;
         rear = -1;
     }

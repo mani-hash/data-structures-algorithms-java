@@ -1,5 +1,5 @@
 public class Deque extends CircularQueue {
-    public Deque() {
+    Deque() {
         front = -1;
         rear = -1;
     }
