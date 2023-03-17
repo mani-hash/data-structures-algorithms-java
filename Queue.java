@@ -9,8 +9,9 @@ public class Queue {
         front = -1;
         rear = -1;
     }
+    
 
-    private void enqueue(int val) {
+    protected void enqueue(int val) {
         if (isFull()) {
             System.out.println("Queue is full");
             return;
@@ -25,7 +26,7 @@ public class Queue {
         queue[rear] = val;
     } 
 
-    private void dequeue() {
+    protected void dequeue() {
         if (isEmpty()) {
             System.out.println("Queue is empty;");
         } else {

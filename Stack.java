@@ -7,7 +7,7 @@ public class Stack {
         stack_pointer = -1;
     }
 
-    private void push(int val) {
+    protected void push(int val) {
         if (isFull()) {
             System.out.println("Stack is full");
         } else {
@@ -18,7 +18,7 @@ public class Stack {
 
     }
 
-    private void pop() {
+    protected void pop() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
         } else {
@@ -26,7 +26,7 @@ public class Stack {
         }
     }
 
-    private void peek() {
+    protected void peek() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
             
@@ -35,14 +35,14 @@ public class Stack {
         }
     }
 
-    private boolean isFull() {
+    protected boolean isFull() {
         if (stack_pointer == len - 1) {
             return true;
         }
         return false;
     }
 
-    private boolean isEmpty() {
+    protected boolean isEmpty() {
         if (stack_pointer == -1) {
             return true;
         }

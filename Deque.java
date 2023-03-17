@@ -4,7 +4,7 @@ public class Deque extends CircularQueue {
         rear = -1;
     }
 
-    private void frontAdd(int val) {
+    protected void frontAdd(int val) {
         if (isFull()) {
             System.out.println("Deque is full");
             return;
@@ -20,15 +20,15 @@ public class Deque extends CircularQueue {
         queue[front] = val;        
     }
 
-    private void frontRemove() {
+    protected void frontRemove() {
         dequeue();
     }
 
-    private void rearAdd(int val) {
+    protected void rearAdd(int val) {
         enqueue(val);
     }
 
-    private void rearRemove() {
+    protected void rearRemove() {
         if (isEmpty()) {
             System.out.println("Queue is empty");       
         } else if (rear == 0) {

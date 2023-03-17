@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 public class LinkedList {
-    Node head;
+    private Node head;
     private int size;
 
     LinkedList() {
@@ -10,13 +10,13 @@ public class LinkedList {
 
     //find list size
 
-    private int size() {
+    protected int size() {
         return size;
     }
 
     //add methods
 
-    private void addLast(int val) {
+    protected void addLast(int val) {
         if (head == null) { 
             head = new Node(val);   
         } else {
@@ -34,7 +34,7 @@ public class LinkedList {
         size+=1;
     }
 
-    private void addFirst(int val) {
+    protected void addFirst(int val) {
         if (head == null) {
             head = new Node(val);
         } else {
@@ -45,25 +45,31 @@ public class LinkedList {
         size+=1;
     }
 
-    private void add(int index, int val) {
-        Node node = searchIndex(index-1);
-        if (node != null) {
-            Node new_node = new Node(val);
-            new_node.pointer = node.pointer;
-            node.pointer = new_node;
+    protected void add(int index, int val) {
+        if (head == null) {
+            head = new Node(val);
             size+=1;
         } else {
-            throw new IndexOutOfBoundsException();
+            Node node = searchIndex(index-1);
+            
+            if (node != null) {
+                Node new_node = new Node(val);
+                new_node.pointer = node.pointer;
+                node.pointer = new_node;
+                size+=1;
+            } else {
+                throw new IndexOutOfBoundsException();
+            }
         }
     }
 
-    private void add(int val) {
+    protected void add(int val) {
         addLast(val);
     }
 
     //remove methods
 
-    private void removeFirst() {
+    protected void removeFirst() {
         if (head == null) {
             throw new NoSuchElementException();
         } else if (head.pointer == null) {
@@ -74,7 +80,7 @@ public class LinkedList {
         size -= 1;
     }
 
-    private void remove(int index) {
+    protected void remove(int index) {
         if (index == 0) {
             removeFirst();
         } else {
@@ -88,11 +94,11 @@ public class LinkedList {
         }
     }
 
-    private void removeLast() {
+    protected void removeLast() {
         remove(this.size - 1);
     }
 
-    private void clear() {
+    protected void clear() {
         head = null;
         size = 0;
     }
@@ -100,7 +106,7 @@ public class LinkedList {
 
     //print all elements
 
-    private void traverse() {
+    protected void traverse() {
         Node point = head;
         
         while (point != null) {
@@ -130,7 +136,7 @@ public class LinkedList {
 
     //get methods
 
-    private int get(int index) {
+    protected int get(int index) {
         Node node = searchIndex(index);
         if (node != null) {
             return node.data;
@@ -139,18 +145,18 @@ public class LinkedList {
         }
     }
 
-    private int getFirst() {
+    protected int getFirst() {
         return get(0);
     }
 
-    private int getLast() {
+    protected int getLast() {
         return get(this.size - 1);
     }
 
 
     //set methods
 
-    private void set(int index, int val) {
+    protected void set(int index, int val) {
         Node tnode = searchIndex(index);
         if (tnode != null) {
             tnode.data = val;
