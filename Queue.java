@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Queue {
     final protected int len = 5;
     protected int[] queue = new int[len];
@@ -42,7 +40,7 @@ public class Queue {
         }
     }
 
-    private boolean isFull() {
+    protected boolean isFull() {
         if (rear == len-1) {
             return true;
         }
