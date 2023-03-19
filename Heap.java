@@ -31,11 +31,7 @@ public class Heap {
             return arr;
         }
 
-        
         return heapify(arr, index-1);
-
-        
-
     }
 
     public static void main(String[] args) {
@@ -47,10 +43,8 @@ public class Heap {
         }
 
         ArrayList<Integer> new_arr = heapify(arrL, (arrL.size()/2)-1);
-
         for (int i : new_arr) {
             System.out.println(i);
         }
-        
     }
 }
