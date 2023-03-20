@@ -3,22 +3,25 @@ import java.util.ArrayList;
 
 public class Heap {
     ArrayList<Integer> arr = new ArrayList<Integer>();
+    String mode;
 
-    Heap(ArrayList<Integer> val) {
+    Heap(ArrayList<Integer> val, String type) {
         arr = val;
-        arr = heapify(0);
+        mode = type;
+        arr = heapify(0, mode);
     }
 
-    Heap(int[] val) {
+    Heap(int[] val, String type) {
+        mode = type;
         for (int i : val) {
             arr.add(i);
         }
-        arr = heapify(0);
+        arr = heapify(0, mode);
     }
 
     protected void insert(int val) {
         arr.add(val);
-        arr = heapify(0);
+        arr = heapify(0, mode);
 
     }
 
@@ -26,7 +29,7 @@ public class Heap {
         int last_index = arr.size() - 1;
         arr.set(index, arr.get(last_index));
         arr.remove(last_index);
-        arr = heapify(0);
+        arr = heapify(0, mode);
     }
 
     protected int peek() {
@@ -75,28 +78,65 @@ public class Heap {
         return arr;
     }
 
-    private ArrayList<Integer> heapify(int index) {
+    private ArrayList<Integer> minheapify(int index) {
+        int left = (2*index)+1;
+        int right = (2*index)+2;
+        int small = index;
+
+        if (left <= arr.size()-1) {
+            if (arr.get(left) < arr.get(small)) {
+                small = left;
+            }
+        }
+
+        if (right <= arr.size()-1) {
+            if (arr.get(right) < arr.get(small)) {
+                small = right;
+            }
+        }
+
+        if (arr.get(index) != arr.get(small)) {
+            int swap = arr.get(index);
+            arr.set(index, arr.get(small));
+            arr.set(small, swap);
+        
+            if ((index%2 == 0) && (index > 0)) {
+                arr = minheapify((index/2) - 1);
+            } else {
+                arr = minheapify(index/2);
+            }
+            arr = minheapify(small);
+        } else {
+            return arr;
+        }
+        return arr;
+    }
+
+    private ArrayList<Integer> heapify(int index, String mode) {
     
         if (index > (arr.size()/2)-1) {
             return arr;
         }
+        if (mode == "min") {
+            arr = minheapify(index);
+        } else {
+            arr = maxheapify(index);
+        }
 
-        arr = maxheapify(index);
-
-        return heapify(index+1);
+        return heapify(index+1, mode);
     }
 
     public static void main(String[] args) {
-        // int[] arr = {1, 2, 3, 4, 10, 25, 30, 40, 1000, 5000};
-        int [] arr = {3, 56, 89, 1, 34, 1000, 1, 23};
+        int[] arr = {1, 2, 3, 4, 10, 25, 30, 40, 1000, 5000};
+        // int [] arr = {3, 56, 89, 1, 34, 1000, 1, 23};
 
-        Heap heap = new Heap(arr);
+        Heap heap = new Heap(arr, "min");
 
-        heap.insert(666);
-        heap.insert(78);
-        heap.delete(5);
-        System.out.println(heap.peek());
-        System.out.println(heap.extract());
+        // heap.insert(666);
+        // heap.insert(78);
+        // heap.delete(5);
+        // System.out.println(heap.peek());
+        // System.out.println(heap.extract());
 
         for (int i : heap.arr) {
             System.out.println(i);
