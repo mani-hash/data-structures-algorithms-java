@@ -8,7 +8,7 @@ public class Heap {
     Heap(ArrayList<Integer> val, String type) {
         arr = val;
         mode = type;
-        arr = heapify(0, mode);
+        arr = heapify(0);
     }
 
     Heap(int[] val, String type) {
@@ -16,12 +16,12 @@ public class Heap {
         for (int i : val) {
             arr.add(i);
         }
-        arr = heapify(0, mode);
+        arr = heapify(0);
     }
 
     protected void insert(int val) {
         arr.add(val);
-        arr = heapify(0, mode);
+        arr = heapify(0);
 
     }
 
@@ -29,7 +29,7 @@ public class Heap {
         int last_index = arr.size() - 1;
         arr.set(index, arr.get(last_index));
         arr.remove(last_index);
-        arr = heapify(0, mode);
+        arr = heapify(0);
     }
 
     protected int peek() {
@@ -44,93 +44,75 @@ public class Heap {
 
 
 
-    private ArrayList<Integer> maxheapify(int index) {
+    private ArrayList<Integer> heapRecur(int index) {
         int left = (2*index)+1;
         int right = (2*index)+2;
-        int large = index;
+        int target = index;
+        int indexL = arr.size()-1;
 
-        if (left <= arr.size()-1) {
-            if (arr.get(left) > arr.get(large)) {
-                large = left;
+        if (left <= indexL) {
+            if (mode == "min") {
+                if (arr.get(left) < arr.get(target)) {
+                    target = left;
+                }
+
+            } else {
+                if (arr.get(left) > arr.get(target)) {
+                    target = left;
+                }
+            } 
+        }
+
+        if (right <= indexL) {
+            if (mode == "min") {
+                if (arr.get(right) < arr.get(target)) {
+                    target = right;
+                }
+            } else {
+                if (arr.get(right) > arr.get(target)) {
+                    target = right;
+                }
             }
         }
 
-        if (right <= arr.size()-1) {
-            if (arr.get(right) > arr.get(large)) {
-                large = right;
-            }
-        }
+        if (arr.get(index) != arr.get(target)) {
 
-        if (arr.get(index) != arr.get(large)) {
             int swap = arr.get(index);
-            arr.set(index, arr.get(large));
-            arr.set(large, swap);
+            arr.set(index, arr.get(target));
+            arr.set(target, swap);
         
             if ((index%2 == 0) && (index > 0)) {
-                arr = maxheapify((index/2) - 1);
-            } else {
-                arr = maxheapify(index/2);
+                arr = heapRecur((index/2) - 1);
+            } else if (index%2 != 0) {
+                arr = heapRecur(index/2);
             }
-            arr = maxheapify(large);
+            arr = heapRecur(target);
+            
         } else {
             return arr;
         }
         return arr;
     }
 
-    private ArrayList<Integer> minheapify(int index) {
-        int left = (2*index)+1;
-        int right = (2*index)+2;
-        int small = index;
-
-        if (left <= arr.size()-1) {
-            if (arr.get(left) < arr.get(small)) {
-                small = left;
-            }
-        }
-
-        if (right <= arr.size()-1) {
-            if (arr.get(right) < arr.get(small)) {
-                small = right;
-            }
-        }
-
-        if (arr.get(index) != arr.get(small)) {
-            int swap = arr.get(index);
-            arr.set(index, arr.get(small));
-            arr.set(small, swap);
-        
-            if ((index%2 == 0) && (index > 0)) {
-                arr = minheapify((index/2) - 1);
-            } else {
-                arr = minheapify(index/2);
-            }
-            arr = minheapify(small);
-        } else {
-            return arr;
-        }
-        return arr;
-    }
-
-    private ArrayList<Integer> heapify(int index, String mode) {
+    private ArrayList<Integer> heapify(int index) {
     
         if (index > (arr.size()/2)-1) {
             return arr;
         }
         if (mode == "min") {
-            arr = minheapify(index);
+            arr = heapRecur(index);
         } else {
-            arr = maxheapify(index);
+            arr = heapRecur(index);
         }
 
-        return heapify(index+1, mode);
+        return heapify(index+1);
     }
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 10, 25, 30, 40, 1000, 5000};
-        // int [] arr = {3, 56, 89, 1, 34, 1000, 1, 23};
+        // int[] arr = {1, 2, 3, 4, 10, 25, 30, 40, 1000, 5000};
+        int [] arr = {3, 56, 89, 1, 34, 1000, 1, 23};
 
-        Heap heap = new Heap(arr, "min");
+        Heap heap = new Heap(arr, "max");
 
         // heap.insert(666);
         // heap.insert(78);
